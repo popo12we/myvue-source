@@ -37,7 +37,7 @@ function defineReactive(data, key, value) {
       if (value === newvalue) {
         return
       }
-      observe(newValue) // 继续劫持用户设置的值，因为有可能用户设置的值是一个对象
+      observe(newvalue) // 继续劫持用户设置的值，因为有可能用户设置的值是一个对象
       value = newvalue
     },
   })
