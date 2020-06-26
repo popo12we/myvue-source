@@ -9,6 +9,7 @@ export function lifecycleMixin(Vue){
 export function mountComponent(vm,el){
     const options=vm.$options
     vm.$el=el
+     callHook(vm, 'beforeMount')
     let updateComponent=()=>{
         // vm._render()生成虚拟dom
         // vm._update生成真实dom
@@ -16,4 +17,15 @@ export function mountComponent(vm,el){
     }
     //渲染更新watcher 渲染和更新都走这里
     new Watcher(vm,updateComponent,()=>{},true)
+    callHook(vm, 'mounted')
+}
+
+export function callHook(vm, hook) {
+  const handlers = vm.$options[hook] // [fn,fn,fn]
+  if (handlers) {
+    // 找到对应的钩子依次执行
+    for (let i = 0; i < handlers.length; i++) {
+      handlers[i].call(vm)
+    }
+  }
 }

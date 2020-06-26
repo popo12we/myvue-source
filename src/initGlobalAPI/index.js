@@ -4,3 +4,4 @@ export function initGlobalAPI(Vue){
        this.options=mergeOptions(this.options,mixin)
    }
 }
+
